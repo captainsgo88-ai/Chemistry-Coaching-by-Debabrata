@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Chemistry Coaching by Debabrata"
+description = "A warm, polished website for Chemistry Coaching by Debabrata in Makrampur, Bolpur, helping students explore chemistry courses, fees, coaching highlights, contact details, and visitor reviews."
+version = "1.0.0"
+id = "artifacts/chemistry-coaching-ccd"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24534
+
+[services.development]
+run = "pnpm --filter @workspace/chemistry-coaching-ccd run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/chemistry-coaching-ccd", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/chemistry-coaching-ccd/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24534"
+BASE_PATH = "/"
